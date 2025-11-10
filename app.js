@@ -48,5 +48,34 @@ document.addEventListener('keydown', (ev) => {
   if (ev.key.toLowerCase() === 'w') scrollToSection('workouts');
 });
 
-// Show first workout on page load
-document.addEventListener('DOMContentLoaded', showWorkout);
+// ---- LEADERBOARD CODE ----
+
+// Static sample data: leaderboard names & points
+const leaderboardData = [
+  { name: "Charlie", points: 150 },
+  { name: "Alex", points: 120 },
+  { name: "Jordan", points: 110 },
+  { name: "Taylor", points: 100 },
+  { name: "Sam", points: 90 }
+];
+
+// Function to show leaderboard on the page
+function showLeaderboard() {
+  const leaderboardList = document.getElementById('leaderboard-list');
+  leaderboardList.innerHTML = ""; // Clear previous entries
+
+  leaderboardData.forEach(user => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span>${user.name}</span>
+      <span>${user.points} pts</span>
+    `;
+    leaderboardList.appendChild(li);
+  });
+}
+
+// Show workout and leaderboard on page load
+document.addEventListener('DOMContentLoaded', () => {
+  showWorkout();
+  showLeaderboard();
+});
